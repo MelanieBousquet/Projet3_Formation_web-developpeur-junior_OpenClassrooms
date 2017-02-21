@@ -10,7 +10,7 @@ API Google MAPS / API OpenData ville de Paris / API Web Storage
 
 Utilisation Canvas, compatibilité tactile sur smartphone et tablette
 
-Slider automatique et contrôlable en POO, conversion en plugin JQuery EN COURS
+Slider automatique et contrôlable en POO, conversion en plugin JQuery à retrouver ds repo dédié
 
 Tests unitaires et fonctionnels avec BDD framework Jasmine - EN COURS
 
