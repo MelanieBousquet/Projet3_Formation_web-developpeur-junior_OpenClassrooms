@@ -1,0 +1,369 @@
+html,
+body,
+button {
+    margin: 0 auto;
+    font-family: 'Arimo', sans-serif;
+}
+
+
+/* ------------------- Header --------------------- */
+
+header {
+    height: 100px;
+    background-color: #00A0B0;
+    border-bottom: solid 5px #016d78;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Architects Daughter', cursive;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+/* Logo Eiffel Tower */
+
+header img:first-child {
+    max-height: 100px;
+    margin: 50px;
+}
+
+
+/* Logo velib */
+
+header img:last-child {
+    max-height: 30px;
+    margin: 20px;
+}
+
+@media screen and (max-width: 570px) {
+    /* Logo velib */
+    header img:last-child {
+        display: none;
+    }
+    h1 {
+        font-size: 20px;
+        margin: 10px;
+    }
+    
+    header img:first-child {
+        margin: 10px;
+    }
+}
+
+
+/* -------------------- Section tutorial ----------------- */
+
+#tutorial {
+    color: #514640;
+    position: relative;
+    /* for positionning buttons */
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+
+/* Tutorial titles */
+
+#tutorial h2 {
+    text-align: center;
+    font-size: 30px;
+    color: #514640;
+    margin: 0;
+    padding-top: 50px;
+}
+
+#tutorial h3 {
+    color: white;
+    text-align: center;
+}
+
+#tutorial h3 span {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #EB6841;
+}
+
+
+/* Slides style */
+
+.fade:first-of-type {
+    display: flex;
+}
+
+.fade {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.fade div {
+    padding: 20px;
+}
+
+.fade img {
+    max-height: 300px;
+}
+
+@media screen and (max-width: 700px) {
+    .fade {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .fade img {
+        max-width: 150px;
+    }
+}
+
+
+/* Fading animation */
+
+.fade,
+.info-station,
+.station-name,
+.station-address,
+.available-bikes,
+.reservation-button,
+.reservation {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 2.5s;
+    animation-name: fade;
+    animation-duration: 2.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+/* Tutorial slider controls */
+
+#tutorial button {
+    border-radius: 8px;
+    background-color: #EB6841;
+    border: solid 2px #d44d02;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+#tutorial button:hover {
+    background-color: #d44d02;
+    cursor: pointer;
+}
+
+.prev {
+    position: absolute;
+    top: 45%;
+}
+
+.next {
+    position: absolute;
+    right: 0;
+    top: 45%;
+}
+
+.stop {
+    position: absolute;
+    left: 45%;
+    bottom: 10px;
+}
+
+.play {
+    position: absolute;
+    right: 45%;
+    bottom: 10px;
+}
+
+@media screen and (max-width: 700px) {
+    .stop {
+        left: 10%;
+    }
+    .play {
+        right: 10%;
+    }
+}
+
+/* ---------------------- Section Reserv-Map --------------------- */
+
+#reserv-map {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1200px) {
+    #reserv-map {
+        flex-direction: column;
+    }
+    #map {
+        height: 300px;
+        margin: 20px;
+        border: solid 2px #556270;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    #map {
+        height: 600px;
+        margin: 20px;
+        border: solid 2px #556270;
+        flex: 3;
+    }
+}
+
+
+/* Aside : info station & reservation */
+
+aside {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.info-station,
+.reservation {
+    height: 280px;
+    max-width: 500px;
+    margin: 20px;
+    color: white;
+    background-color: #556270;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+}
+
+#reserv-map h3 {
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #45505b;
+    padding: 10px;
+    margin-top: 0;
+}
+
+.info-station p {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 0; padding-top: 0;
+    margin: 10px;
+}
+
+
+/* reservation buttons */
+
+#reserv-map button, .cancel {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.info-station button {
+    display: none;
+    ;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.info-station button,
+.reservation button:last-child, 
+.cancel {
+    border: solid 2px #aa2b35;
+    background-color: #CC333F;
+    color: white;
+}
+
+#erase {
+    color: #556270;
+    background-color: white;
+    border: solid 2px #45505b;
+}
+
+.cancel {
+    padding: 3px 10px;
+    margin: 8px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation {
+    display: none;
+}
+
+
+/* ----------------------- Footer ----------------------- */
+
+footer {
+    height: 140px;
+    background-color: #EDC951;
+    border-top: solid 5px #e4af00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    color: #6d570c;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    margin: 5px;
+}
+
+footer .timer-text {
+    background-color: #EB6841;
+    padding: 2px 10px;
+    border-radius: 15px;
+    color: white;
+}
+
+@media screen and (max-width: 570px) {
+    footer p {
+        font-size: 18px;
+    }
+}
+
+
+/* canvas */
+
+#canvas-sign {
+    border: solid 2px #45505b;
+    background-color: white;
+    height: 150px;
+    width: 99%;
+}

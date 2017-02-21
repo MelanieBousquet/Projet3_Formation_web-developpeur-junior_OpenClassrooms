@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Réservation de Vélibs à Paris</title>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Arimo');
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="img/paris-1670383.png" alt="tour eiffel paris">
+        <h1>Réservation de Vélib à Paris</h1>
+        <img src="img/bike-1042462_1280.png" alt="vélo">
+    </header>
+
+    <section id="tutorial">
+        <div class="container">
+            <h2>Comment l'utiliser ?</h2>
+            <div class="fade">
+                <div><img src="img/etape1.png">
+                </div>
+                <div>
+                    <h3><span>Etape 1</span></h3>
+                    <p>Des marqueurs indiquent le nombre de stations présentes dans un périmètre donné. Zoomer ou cliquer sur un marqueur pour voir les stations</p>
+                </div>
+            </div>
+            <div class="fade">
+                <div><img src="img/etape2.png">
+                </div>
+                <div>
+                    <h3><span>Etape 2</span></h3>
+                    <p>Cliquer sur une station pour en avoir les détails dans le panneau d'informations (adresse de la station, nombre de vélos disponibles)</p>
+                </div>
+            </div>
+            <div class="fade">
+                <div><img src="img/etape3.png">
+                </div>
+                <div>
+                    <h3><span>Etape 3</span></h3>
+                    <p>Dans le panneau "Détails de la station" à droite de la carte, cliquer sur "Réserver" afin d'ouvrir le panneau de réservation</p>
+                </div>
+            </div>
+            <div class="fade">
+                <div><img src="img/etape4.png">
+                </div>
+                <div>
+                    <h3><span>Etape 4</span></h3>
+                    <p>Signer dans le panneau prévu à cet effet, cliquer sur "Effacer" pour recommencer si besoin, puis cliquer sur "Valider"</p>
+                </div>
+            </div>
+            <div class="fade">
+                <div><img src="img/etape5.png">
+                </div>
+                <div>
+                    <h3><span>Etape 5</span></h3>
+                    <p>Votre réservation est valable pendant 20min avant confirmation, cliquer sur "Annuler" pour annuler votre réservation. Si vous décidez de réserver dans une autre station, cela annule automatiquement votre réservation précédente</p>
+                </div>
+            </div>
+        </div>
+        <button class="next">></button>
+        <button class="prev">
+            <</button>
+                <button class="stop">| |</button>
+                <button class="play">>></button>
+    </section>
+
+    <section id="reserv-map">
+        <div id="map"></div>
+        <aside>
+            <div class="info-station">
+                <h3>Détails de la station</h3>
+                <p class="station-name">Sélectionner une station</p>
+                <p class="station-address"></p>
+                <p class="available-bikes"></p>
+                <button class="reservation-button">Réserver</button>
+            </div>
+            <div class="reservation">
+                <h3>Signer pour réserver</h3>
+                <canvas id="canvas-sign"></canvas>
+                <div class="buttons">
+                    <button id="erase">Effacer</button>
+                    <button id="submit">Valider</button>
+                </div>
+            </div>
+
+        </aside>
+    </section>
+
+    <footer>
+        <p>
+            <span class="footer-text">Aucune réservation en cours</span><br/>
+            <span class="timer-text"></span><br/>
+            <button class="cancel">Annuler</button>
+        </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDqnF7_sYGUDLj0BkECfFUxwyVqCGn99o"></script>
+    <script src="markerclusterer.js"></script>
+    <script src="ajax.js"></script>
+    <script src="slider.js"></script>
+    <script src="countdown.js"></script>
+    <script src="map.js"></script>
+    <script src="canvas.js"></script>
+
+
+
+</body>
