@@ -164,7 +164,6 @@ header img:last-child {
 /* Tutorial slider controls */
 
 #tutorial button {
-    border-radius: 8px;
     background-color: #EB6841;
     border: solid 2px #d44d02;
     height: 30px;
