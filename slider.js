@@ -1,4 +1,5 @@
 var Slider = {
+    // Define current slide
     currentIndex: 0,
 
     init: function () {
@@ -8,7 +9,8 @@ var Slider = {
         Slider.prevSlideOnClick();
         Slider.changeSlideOnKeypress();
     },
-
+    
+    // Display the current slide
     activeSlide: function () {
         var slides = $('.fade');
         var slide = slides.eq(Slider.currentIndex);
@@ -16,6 +18,7 @@ var Slider = {
         slide.css('display', 'flex');
     },
 
+    // Define the next slide as the current slide
     indexPlus: function () {
         var slides = $('.fade');
         var slidesNumber = slides.length;
@@ -25,6 +28,7 @@ var Slider = {
         }
     },
 
+    // Define the previous slide as the the current slide
     indexMinus: function () {
         var slides = $('.fade');
         var slidesNumber = slides.length;
@@ -34,6 +38,7 @@ var Slider = {
         }
     },
 
+    // automatic and controllable slide function
     autoSlide: function () {
         var play = $('.play');
         play.click(function () {
@@ -48,12 +53,14 @@ var Slider = {
         });
 
     },
-
+    
+    // automatic slider on load
     playAutoClick: function () {
         var play = $('.play');
         play.trigger('click');
     },
-
+    
+    // next slide on click on the ">" button
     nextSlideOnClick: function () {
         var next = $('.next');
         next.click(function () {
@@ -61,7 +68,8 @@ var Slider = {
             Slider.activeSlide();
         });
     },
-
+    
+    // previous slide on click on the "<" button
     prevSlideOnClick: function () {
         var prev = $('.prev');
         prev.click(function () {
@@ -69,7 +77,8 @@ var Slider = {
             Slider.activeSlide();
         });
     },
-
+    
+    // previous / next slide with keyboard
     changeSlideOnKeypress: function () {
         $('body').keydown(function (e) {
             if (e.which === 39) {

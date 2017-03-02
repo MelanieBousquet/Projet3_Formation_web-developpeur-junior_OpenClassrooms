@@ -21,7 +21,7 @@ var Map = {
                 lng: 2.3523614
             },
             zoom: 13,
-            minZoom: 12,
+            minZoom: 12, // @TODO adapter sur smartphones
             scrollwheel: false
         });
 
@@ -57,6 +57,7 @@ var Map = {
                 });
                 markers.push(marker);
 
+                // Display infosstations on click on the marker
                 marker.addListener('click', function () {
                     Map.hideInfosStation();
                     Map.reservationButton.css('display', 'block');
@@ -66,8 +67,9 @@ var Map = {
                     Map.stationName.fadeIn('slow');
                     Map.stationAddress.fadeIn('slow');
                     Map.availableBikes.fadeIn('slow');
-
-                    Map.reservationButton.click(function () {
+                    
+                    // Display the panel of reservation on click on the reservation button
+                    Map.reservationButton.click(function () { 
                         if (station.available_bikes > 0) {
                             Map.reservationPanel.css('display', 'block');
                             Map.availableBikes.text('Il y a ' + station.available_bikes + ' vélib(s) disponible(s) à réserver !');
@@ -77,15 +79,17 @@ var Map = {
                             Map.reservationPanel.css('display', 'none');
                         }
                     });
-
+                    
+                    // Register reservation on validation 
                     Map.submitButton.click(function () {
-                        localStorage.setItem('name', station.name);
+                        sessionStorage.setItem('name', station.name);
                         Map.reservationPanel.css('display', 'none');
                         Map.reservationButton.css('display', 'none');
                         Map.availableBikes.text('Vous avez réservé 1 vélib à cette station');
-                        Map.currentReservMessage.text('Vous avez réservé 1 vélib à la station ' + localStorage.name + ' pour ');
-
-                        var duration = 1201;
+                        Map.currentReservMessage.text('Vous avez réservé 1 vélib à la station ' + sessionStorage.name + ' pour ');
+                        
+                        // CountDown for 20min
+                        var duration = 1201; 
                         var timer = setInterval(function () {
                             displayCountDown()
                         }, 1000);
