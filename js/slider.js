@@ -9,7 +9,7 @@ var Slider = {
         Slider.prevSlideOnClick();
         Slider.changeSlideOnKeypress();
     },
-    
+
     // Display the current slide
     activeSlide: function () {
         var slides = $('.fade');
@@ -53,13 +53,13 @@ var Slider = {
         });
 
     },
-    
+
     // automatic slider on load
     playAutoClick: function () {
         var play = $('.play');
         play.trigger('click');
     },
-    
+
     // next slide on click on the ">" button
     nextSlideOnClick: function () {
         var next = $('.next');
@@ -68,7 +68,7 @@ var Slider = {
             Slider.activeSlide();
         });
     },
-    
+
     // previous slide on click on the "<" button
     prevSlideOnClick: function () {
         var prev = $('.prev');
@@ -77,7 +77,7 @@ var Slider = {
             Slider.activeSlide();
         });
     },
-    
+
     // previous / next slide with keyboard
     changeSlideOnKeypress: function () {
         $('body').keydown(function (e) {

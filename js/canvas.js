@@ -1,7 +1,7 @@
 var CanvasForSign = {
 
 
-    // Variables to keep track of the mouse position and left-button status 
+    // Variables to keep track of the mouse position and left-button status
     mouseX: 0,
     mouseY: 0,
     mouseDown: 0,
@@ -20,6 +20,8 @@ var CanvasForSign = {
         // Get the specific canvas element from the HTML document
         ctx = document.getElementById('canvas-sign').getContext('2d');
 
+        document.getElementById('submit').style.display = "none";
+
 
         // React to mouse events on the canvas, and mouseup on the entire document
         document.getElementById('canvas-sign').addEventListener('mousedown', CanvasForSign.sketchpad_mouseDown, false);
@@ -34,6 +36,7 @@ var CanvasForSign = {
         // Reset the canvas on click "Effacer"
         document.getElementById('erase').addEventListener('click', function () {
             ctx.clearRect(0, 0, document.getElementById('canvas-sign').width, document.getElementById('canvas-sign').height);
+            document.getElementById('submit').style.display = "none";
         });
 
     },
@@ -42,7 +45,7 @@ var CanvasForSign = {
     // Parameters are: A canvas context, the x position, the y position, the size of the dot
     drawLine: function (ctx, x, y, size) {
 
-        // If lastX is not set, set lastX and lastY to the current position 
+        // If lastX is not set, set lastX and lastY to the current position
         if (CanvasForSign.lastX == -1) {
             CanvasForSign.lastX = x;
             CanvasForSign.lastY = y;
@@ -74,12 +77,11 @@ var CanvasForSign = {
         // Update the last position to reference the current position
         CanvasForSign.lastX = x;
         CanvasForSign.lastY = y;
+
+        document.getElementById('submit').style.display = "block";
     },
 
-    // Clear the canvas context using the canvas width and height
-    clearCanvas: function (canvas, ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    },
+
 
     // Keep track of the mouse button being pressed and draw a dot at current location
     sketchpad_mouseDown: function () {

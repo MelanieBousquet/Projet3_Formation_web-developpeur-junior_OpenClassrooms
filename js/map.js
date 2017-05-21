@@ -12,6 +12,7 @@ var Map = {
     currentReservMessage: $('.footer-text'),
     cancelReservation: $('.cancel'),
     timerText: $('.timer-text'),
+    x: null,
 
     // Google Maps Creation, no countdown on footer, call of the velib API
     init: function () {
@@ -21,12 +22,19 @@ var Map = {
                 lng: 2.3523614
             },
             zoom: 13,
-            minZoom: 12, // @TODO adapter sur smartphones
+            minZoom: 11,
             scrollwheel: false
         });
 
         Map.hideCountDownPanel();
         Map.callApiVelib();
+    },
+    // Add a marker clusterer to manage the markers.
+    displayMarkerCluster: function (map, markers) {
+        var markerCluster = new MarkerClusterer(Map.map, markers, {
+            imagePath: 'img/m/m',
+
+        });
     },
 
     // when there isn't a current reservation : no countdown, no cancel button
@@ -43,12 +51,38 @@ var Map = {
         Map.availableBikes.hide();
     },
 
+    countDown: function() {
+        var finishDate = new Date().getTime() + 1200000;
+        Map.x = setInterval(function() {
+            var now = new Date().getTime();
+
+            var distance = finishDate - now;
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Display the result in the element with id="demo"
+            Map.timerText.fadeIn();
+             Map.timerText.text(minutes + "m " + seconds + "s ");
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                Map.currentReservMessage.text('Votre réservation a expiré');
+                Map.timerText.text('');
+            }
+
+
+        }, 999);
+
+    },
+
     // Call of the velibAPI, display markers and clusterers, reservation, and countdown
     callApiVelib: function () {
         ajaxGet(Map.velibApi, function (reponse) {
             // Answer in a Javascript array
             var stations = JSON.parse(reponse);
             markers = [];
+            // For each station : we create a marker on the map + we define actions on click on this marker
             stations.forEach(function (station) {
                 var marker = new google.maps.Marker({
                     position: station.position,
@@ -57,7 +91,7 @@ var Map = {
                 });
                 markers.push(marker);
 
-                // Display infosstations on click on the marker
+                // Display infosStations on click on the marker
                 marker.addListener('click', function () {
                     Map.hideInfosStation();
                     Map.reservationButton.css('display', 'block');
@@ -67,9 +101,14 @@ var Map = {
                     Map.stationName.fadeIn('slow');
                     Map.stationAddress.fadeIn('slow');
                     Map.availableBikes.fadeIn('slow');
-                    
+                    // On click on a marker, smooth scroll to the informations panel for a better experience for mobile devices
+                    $('html, body').animate({
+                        scrollTop: Map.infoStationPanel.offset().top},
+                        'slow'
+                    );
+
                     // Display the panel of reservation on click on the reservation button
-                    Map.reservationButton.click(function () { 
+                    Map.reservationButton.click(function () {
                         if (station.available_bikes > 0) {
                             Map.reservationPanel.css('display', 'block');
                             Map.availableBikes.text('Il y a ' + station.available_bikes + ' vélib(s) disponible(s) à réserver !');
@@ -78,75 +117,39 @@ var Map = {
                             Map.reservationButton.css('display', 'none');
                             Map.reservationPanel.css('display', 'none');
                         }
+                        // On click on a marker, smooth scroll to the reservation panel for a better experience for mobile devices
+                        $('html, body').animate({
+                        scrollTop: Map.reservationPanel.offset().top},
+                        'slow'
+                    );
                     });
-                    
-                    // Register reservation on validation 
+
+                    // Register reservation on validation
                     Map.submitButton.click(function () {
                         sessionStorage.setItem('name', station.name);
                         Map.reservationPanel.css('display', 'none');
                         Map.reservationButton.css('display', 'none');
                         Map.availableBikes.text('Vous avez réservé 1 vélib à cette station');
                         Map.currentReservMessage.text('Vous avez réservé 1 vélib à la station ' + sessionStorage.name + ' pour ');
-                        
-                        // CountDown for 20min
-                        var duration = 1201; 
-                        var timer = setInterval(function () {
-                            displayCountDown()
-                        }, 1000);
-
-                        function displayCountDown() {
-                            duration--;
-                            Map.timerText.show();
-
-                            if (duration > 59) {
-                                m = Math.floor(duration / 60);
-                                s = duration - m * 60;
-                                if (s < 10) {
-                                    s = "0" + s;
-                                } else if (m < 10) {
-                                    m = "0" + m;
-                                }
-                                Map.timerText.text(m + " min " + s + " s");
-                            } else if (duration <= 59 && duration > 0) {
-                                Map.timerText.text("00" + " min " + duration + " s");
-                            } else if (duration === 0) {
-                                Map.currentReservMessage.text('Votre réservation a expiré');
-                                Map.timerText.text('');
-                            }
-                            Map.submitButton.click(function () {
-                                duration = 1201;
-                            })
-                            Map.cancelReservation.click(function () {
-                                duration = 0;
-                                Map.timerText.hide();
-                            })
-                        };
                         Map.cancelReservation.show();
+                        // Reset a precedent countdown if there was a precedent reservation
+                        clearInterval(Map.x);
+                        // Start a new countdow for the current reservation
+                        Map.countDown();
+
+                        // Annulation of the reservation
                         Map.cancelReservation.click(function () {
+                            clearInterval(Map.x);
                             Map.currentReservMessage.text('');
                             Map.timerText.text('Réservation annulée');
-                            Map.timerText.hide();
                             Map.cancelReservation.hide();
                         })
-
                     })
-
-
                 });
             })
             Map.displayMarkerCluster(map, markers);
         })
-
     },
-    // Add a marker clusterer to manage the markers.
-    displayMarkerCluster: function (map, markers) {
-        var markerCluster = new MarkerClusterer(Map.map, markers, {
-            imagePath: 'img/m/m',
-
-        });
-    },
-
-
 
 }
 
