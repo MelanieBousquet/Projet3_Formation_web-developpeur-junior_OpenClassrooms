@@ -12,7 +12,7 @@ Utilisation Canvas, compatibilité tactile sur smartphone et tablette
 
 Slider automatique et contrôlable en POO, conversion en plugin JQuery à retrouver ds repo dédié
 
-Tests unitaires et fonctionnels avec BDD framework Jasmine - EN COURS
+Tests unitaires et fonctionnels avec TDD framework Jasmine - EN COURS
 
 SOUTENANCE EN ATTENTE
 
