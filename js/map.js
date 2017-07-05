@@ -66,7 +66,7 @@ var Map = {
 
             // If the count down is finished, write some text
             if (distance < 0) {
-                clearInterval(x);
+                clearInterval(Map.x);
                 Map.currentReservMessage.text('Votre réservation a expiré');
                 Map.timerText.text('');
             }
